@@ -9,7 +9,7 @@
   <button onclick="verificarClave()">Entrar</button>
  </div>
 
- <div id="pantallaHuella" style="display:none">
+ <div id="PantallaHuella" style="display:none">
   <h1>ACCESO RESTRINGIDO</h1>
   <button>Escanear</button>
  </div>
@@ -19,7 +19,7 @@
      var clave = document.getElementById("ClaveIngresada").value;
      if (clave==="Verónica Lizzette Chávez Mendoza"){
        document.getElementById("PantallaContraseña").style.display="none";
-       document.getElementById("pantallaHuella").style.display="block";
+       document.getElementById("PantallaHuella").style.display="block";
      }else{
        alert("Contraseña Incorrecta");
      }
