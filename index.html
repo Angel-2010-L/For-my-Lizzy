@@ -3,7 +3,27 @@
   <little> For my Lizzy </little>
 </head>
 <body>
+ <div id="PantallaContraseña">
+  <h1>Ingrese la contraseña</h1>
+  <input type="text" id="claveIngresada">
+  <button onclick="verificarClave()">Entrar</button>
+ </div>
+
+ <div id="pantallaHuella" style="display:none">
   <h1>ACCESO RESTRINGIDO</h1>
   <button>Escanear</button>
+ </div>
+  
+ <script>
+   funtion verificarClave(){
+     var clave = document.getElementById("ClaveIngresada").value;
+     if (clave==="Verónica Lizzette Chávez Mendoza"){
+       document.getElementById("pantallaContraseña").style.display="none";
+       document.getElementById("pantallaHuella").style.display="block";
+     }else{
+       alert("Contraseña Incorrecta");
+     }
+   }
+ </script>
 </body>
 </html>
