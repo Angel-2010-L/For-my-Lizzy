@@ -13,7 +13,11 @@
 
     <div id="PantallaHuella" style="display:none">
         <h1>ACCESO RESTRINGIDO</h1>
-        <button>Escanear</button>
+        <button onclick="mostrarDiagnostico()">Escanear</button>
+    </div>
+
+    <div id="PantallaDiagnostico" style="display:none">
+        <h1>Analizando...</h1>
     </div>
 
     <script>
@@ -27,9 +31,9 @@
             }
         }
 
-        Function mostrarDiagnostico(){
-            document.getElementById("pantallaHuella").style.display="none";
-            document.getElementById("pantallaDiagnostico").style.display="block";
+        function mostrarDiagnostico(){
+            document.getElementById("PantallaHuella").style.display="none";
+            document.getElementById("PantallaDiagnostico").style.display="block";
         }
     </script>
 
