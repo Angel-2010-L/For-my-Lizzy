@@ -1,29 +1,182 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>For my Lizzy</title>
+    <style>
+        body {
+            background-color: #0a0a0a;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px 20px;
+        }
+        h1 {
+            color: #ff4d6d;
+        }
+        button {
+            background-color: #ff4d6d;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #e63e5c;
+        }
+        input {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 6px;
+            border: none;
+        }
+        .huella {
+            font-size: 80px;
+            animation: latido 1.5s infinite;
+        }
+        @keyframes latido {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+            100% { transform: scale(1); }
+        }
+        .barra-fondo {
+            background-color: #333;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 400px;
+            margin: 20px auto;
+            overflow: hidden;
+        }
+        .barra-relleno {
+            background-color: #ff4d6d;
+            height: 25px;
+            width: 0%;
+            text-align: center;
+            line-height: 25px;
+            color: white;
+            transition: width 0.3s;
+        }
+        .certificado {
+            border: 3px solid #ff4d6d;
+            padding: 30px;
+            max-width: 500px;
+            margin: 20px auto;
+            font-family: 'Georgia', serif;
+        }
+        .contador {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+        .estrella {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #555;
+            border: none;
+            display: inline-block;
+            margin: 10px;
+            cursor: pointer;
+        }
+        .estrella.encontrada {
+            background-color: #ffd700;
+        }
+        img {
+            max-width: 250px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+    </style>
 </head>
 <body>
 
+    <!-- ETAPA 0: CONTRASEÑA -->
     <div id="PantallaContraseña">
         <h1>Ingresa la contraseña</h1>
         <input type="text" id="ClaveIngresada">
+        <br>
         <button onclick="verificarClave()">Entrar</button>
     </div>
 
+    <!-- ETAPA 1: HUELLA DIGITAL -->
     <div id="PantallaHuella" style="display:none">
         <h1>ACCESO RESTRINGIDO</h1>
-        <button onclick="mostrarDiagnostico()">Escanear</button>
+        <div class="huella">👆</div>
+        <p id="mensajeHuella">Esperando escaneo...</p>
+        <button onclick="escanearHuella()">Escanear</button>
     </div>
 
+    <!-- ETAPA 2: DIAGNÓSTICO -->
     <div id="PantallaDiagnostico" style="display:none">
         <h1>Analizando...</h1>
+        <p id="mensajeDiagnostico">Pulso: normal ❤️</p>
+        <button id="btnDiagnostico" style="display:none" onclick="mostrarInstalacion()">Continuar</button>
+    </div>
+
+    <!-- ETAPA 3: INSTALACIÓN -->
+    <div id="PantallaInstalacion" style="display:none">
+        <h1>Instalando_v1.0...</h1>
+        <div class="barra-fondo">
+            <div class="barra-relleno" id="barra">0%</div>
+        </div>
+        <p id="mensajeInstalacion">Iniciando...</p>
+    </div>
+
+    <!-- RESULTADO: CERTIFICADO + CONTADOR -->
+    <div id="PantallaCertificado" style="display:none">
+        <div class="certificado">
+            <h1>Certificado Oficial </h1>
+            <p>Se certifica que</p>
+            <h2>Yo</h2>
+            <p>te adoro, te quiero, te amo mi</p>
+            <h2>Lizzy</h2>
+            <p>desde el 27 de julio de 2026, pero realmente desde el 22, pero mejor dejemoslo en el 27</p>
+            <p>Válido hasta que querrás ❤️</p>
+        </div>
+        <div class="contador" id="contador">Calculando tiempo juntos...</div>
+        <button onclick="mostrarDetector()">Siguiente</button>
+    </div>
+
+    <!-- ETAPA 4: DETECTOR DE AMOR -->
+    <div id="PantallaDetector" style="display:none">
+        <h1>Detector de Amor</h1>
+        <!-- CAMBIAR AQUÍ: sube una foto de ella con el nombre lizzy.jpg a la misma carpeta -->
+        <img src="Lizzy,jpg" alt="Foto de Lizzy">
+        <br>
+        <button onclick="analizarFoto()">Analizar foto</button>
+        <p id="resultadoDetector"></p>
+        <button id="btnSiguienteDetector" style="display:none" onclick="mostrarConstelacion()">Siguiente</button>
+    </div>
+
+    <!-- ETAPA 5: MAPA DE CONSTELACIÓN -->
+    <div id="PantallaConstelacion" style="display:none">
+        <h1>Constelación de Recuerdos</h1>
+        <p>Toca cada estrella para revelar un recuerdo</p>
+        <div>
+            <!-- CAMBIAR AQUÍ: escribe tus propios recuerdos -->
+            <button class="estrella" onclick="revelar(this,'Nuestra primera cita')"></button>
+            <button class="estrella" onclick="revelar(this,'La primera vez que te dije te amo')"></button>
+            <button class="estrella" onclick="revelar(this,'Nuestro primer viaje juntos')"></button>
+            <button class="estrella" onclick="revelar(this,'La primera videollamada')"></button>
+            <button class="estrella" onclick="revelar(this,'El día que supe que eras tú')"></button>
+        </div>
+        <p id="mensajeRecuerdo"></p>
+        <button onclick="mostrarCapsula()">Siguiente</button>
+    </div>
+
+    <!-- ETAPA 6: CÁPSULA DEL TIEMPO -->
+    <div id="PantallaCapsula" style="display:none">
+        <h1>Cápsula del Tiempo</h1>
+        <div id="listaCapsulas"></div>
     </div>
 
     <script>
+        // ---------- ETAPA 0: CONTRASEÑA ----------
         function verificarClave(){
             var clave = document.getElementById("ClaveIngresada").value;
-            if (clave==="Verónica Lizzette Chávez Mendoza"){
+            if (clave==="Lizzy"){
                 document.getElementById("PantallaContraseña").style.display="none";
                 document.getElementById("PantallaHuella").style.display="block";
             }else{
@@ -31,9 +184,139 @@
             }
         }
 
-        function mostrarDiagnostico(){
-            document.getElementById("PantallaHuella").style.display="none";
-            document.getElementById("PantallaDiagnostico").style.display="block";
+        // ---------- ETAPA 1: HUELLA DIGITAL ----------
+        function escanearHuella(){
+            document.getElementById("mensajeHuella").innerText = "Escaneando...";
+            setTimeout(function(){
+                document.getElementById("mensajeHuella").innerText = "Identidad verificada: Lizzy ✔";
+                setTimeout(function(){
+                    document.getElementById("PantallaHuella").style.display="none";
+                    document.getElementById("PantallaDiagnostico").style.display="block";
+                    iniciarDiagnostico();
+                }, 1500);
+            }, 2000);
+        }
+
+        // ---------- ETAPA 2: DIAGNÓSTICO ----------
+        function iniciarDiagnostico(){
+            var mensajes = ["Pulso: normal ❤️", "Detectando síntomas...", "Nivel de cariño: alto", "Pulso acelerándose 💓", "Corazón detectado 💗"];
+            var i = 0;
+            var intervalo = setInterval(function(){
+                document.getElementById("mensajeDiagnostico").innerText = mensajes[i];
+                i++;
+                if(i >= mensajes.length){
+                    clearInterval(intervalo);
+                    document.getElementById("btnDiagnostico").style.display="inline-block";
+                }
+            }, 1200);
+        }
+
+        // ---------- ETAPA 3: INSTALACIÓN ----------
+        function mostrarInstalacion(){
+            document.getElementById("PantallaDiagnostico").style.display="none";
+            document.getElementById("PantallaInstalacion").style.display="block";
+
+            var mensajesInstalacion = ["Cargando ternura...", "Verificando compatibilidad: 100%", "Empacando recuerdos...", "Sincronizando corazones...", "Finalizando..."];
+            var porcentaje = 0;
+            var barra = document.getElementById("barra");
+            var msj = document.getElementById("mensajeInstalacion");
+            var idx = 0;
+
+            var intervalo = setInterval(function(){
+                porcentaje += 5;
+                barra.style.width = porcentaje + "%";
+                barra.innerText = porcentaje + "%";
+                if(porcentaje % 20 === 0 && idx < mensajesInstalacion.length){
+                    msj.innerText = mensajesInstalacion[idx];
+                    idx++;
+                }
+                if(porcentaje >= 100){
+                    clearInterval(intervalo);
+                    setTimeout(function(){
+                        document.getElementById("PantallaInstalacion").style.display="none";
+                        document.getElementById("PantallaCertificado").style.display="block";
+                        iniciarContador();
+                    }, 1000);
+                }
+            }, 150);
+        }
+
+        // ---------- CONTADOR EN VIVO ----------
+        function iniciarContador(){
+            var fechaInicio = new Date(2024, 0, 1);
+
+            setInterval(function(){
+                var ahora = new Date();
+                var diferencia = ahora - fechaInicio;
+
+                var segundos = Math.floor(diferencia / 1000) % 60;
+                var minutos = Math.floor(diferencia / (1000*60)) % 60;
+                var horas = Math.floor(diferencia / (1000*60*60)) % 24;
+                var dias = Math.floor(diferencia / (1000*60*60*24));
+
+                document.getElementById("contador").innerText =
+                    dias + " días, " + horas + " horas, " + minutos + " minutos y " + segundos + " segundos juntos";
+            }, 1000);
+        }
+
+        // ---------- ETAPA 4: DETECTOR DE AMOR ----------
+        function mostrarDetector(){
+            document.getElementById("PantallaCertificado").style.display="none";
+            document.getElementById("PantallaDetector").style.display="block";
+        }
+
+        function analizarFoto(){
+            document.getElementById("resultadoDetector").innerText = "Analizando...";
+            setTimeout(function(){
+                var resultados = [
+                    "Nivel de amor: fuera de escala 💘",
+                    "Compatibilidad detectada: 100%",
+                    "Alerta: sonrisa contagiosa detectada",
+                    "Resultado: la persona más especial confirmada"
+                ];
+                var random = resultados[Math.floor(Math.random()*resultados.length)];
+                document.getElementById("resultadoDetector").innerText = random;
+                document.getElementById("btnSiguienteDetector").style.display="inline-block";
+            }, 2000);
+        }
+
+        // ---------- ETAPA 5: CONSTELACIÓN ----------
+        function mostrarConstelacion(){
+            document.getElementById("PantallaDetector").style.display="none";
+            document.getElementById("PantallaConstelacion").style.display="block";
+        }
+
+        function revelar(boton, mensaje){
+            boton.classList.add("encontrada");
+            document.getElementById("mensajeRecuerdo").innerText = mensaje;
+        }
+
+        // ---------- ETAPA 6: CÁPSULA DEL TIEMPO ----------
+        function mostrarCapsula(){
+            document.getElementById("PantallaConstelacion").style.display="none";
+            document.getElementById("PantallaCapsula").style.display="block";
+            cargarCapsulas();
+        }
+
+        function cargarCapsulas(){
+            var capsulas = [
+                { fecha: new Date(2026, 11, 25), mensaje: "Feliz Navidad, te amo" },
+                { fecha: new Date(2027, 0, 1), mensaje: "Feliz año nuevo, mi amor" }
+            ];
+
+            var contenedor = document.getElementById("listaCapsulas");
+            contenedor.innerHTML = "";
+            var ahora = new Date();
+
+            capsulas.forEach(function(c){
+                var p = document.createElement("p");
+                if(ahora >= c.fecha){
+                    p.innerText = "🔓 " + c.mensaje;
+                }else{
+                    p.innerText = "🔒 Se desbloquea el " + c.fecha.toLocaleDateString();
+                }
+                contenedor.appendChild(p);
+            });
         }
     </script>
 
