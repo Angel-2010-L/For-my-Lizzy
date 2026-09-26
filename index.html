@@ -83,11 +83,6 @@
         .estrella.encontrada {
             background-color: #ffd700;
         }
-        img {
-            max-width: 250px;
-            border-radius: 10px;
-            margin-top: 15px;
-        }
     </style>
 </head>
 <body>
@@ -127,12 +122,12 @@
     <!-- RESULTADO: CERTIFICADO + CONTADOR -->
     <div id="PantallaCertificado" style="display:none">
         <div class="certificado">
-            <h1>Certificado Oficial </h1>
+            <h1>Certificado Oficial</h1>
             <p>Se certifica que</p>
             <h2>Yo</h2>
-            <p>te adoro, te quiero, te amo mi</p>
+            <p>quiero, adoro y amo oficialmente a mi linda</p>
             <h2>Lizzy</h2>
-            <p>desde el 27 de julio de 2026, pero realmente desde el 22, pero mejor dejemoslo en el 27</p>
+            <p>desde el 27 de julio de 2026</p>
             <p>Válido hasta que querrás ❤️</p>
         </div>
         <div class="contador" id="contador">Calculando tiempo juntos...</div>
@@ -141,10 +136,7 @@
 
     <!-- ETAPA 4: DETECTOR DE AMOR -->
     <div id="PantallaDetector" style="display:none">
-        <h1>Detector de Amor</h1>
-        <!-- CAMBIAR AQUÍ: sube una foto de ella con el nombre lizzy.jpg a la misma carpeta -->
-        <img src="Lizzy,jpg" alt="Foto de Lizzy">
-        <br>
+        <h1>Detector</h1>
         <button onclick="analizarFoto()">Analizar foto</button>
         <p id="resultadoDetector"></p>
         <button id="btnSiguienteDetector" style="display:none" onclick="mostrarConstelacion()">Siguiente</button>
@@ -155,12 +147,11 @@
         <h1>Constelación de Recuerdos</h1>
         <p>Toca cada estrella para revelar un recuerdo</p>
         <div>
-            <!-- CAMBIAR AQUÍ: escribe tus propios recuerdos -->
-            <button class="estrella" onclick="revelar(this,'Nuestra primera cita')"></button>
-            <button class="estrella" onclick="revelar(this,'La primera vez que te dije te amo')"></button>
-            <button class="estrella" onclick="revelar(this,'Nuestro primer viaje juntos')"></button>
-            <button class="estrella" onclick="revelar(this,'La primera videollamada')"></button>
-            <button class="estrella" onclick="revelar(this,'El día que supe que eras tú')"></button>
+            <button class="estrella" onclick="revelar(this,'Tenemos varios recuerdos juntos')"></button>
+            <button class="estrella" onclick="revelar(this,'Como la vez cuando nos fuimos a la playa')"></button>
+            <button class="estrella" onclick="revelar(this,'La primera vez que te bese')"></button>
+            <button class="estrella" onclick="revelar(this,'El viernes que me dijiste que me querías y amabas y te pusiste muy nerviosa, jejeje')"></button>
+            <button class="estrella" onclick="revelar(this,'El día día que me hiciste hablar puro niño de 5 años')"></button>
         </div>
         <p id="mensajeRecuerdo"></p>
         <button onclick="mostrarCapsula()">Siguiente</button>
@@ -173,10 +164,9 @@
     </div>
 
     <script>
-        // ---------- ETAPA 0: CONTRASEÑA ----------
         function verificarClave(){
             var clave = document.getElementById("ClaveIngresada").value;
-            if (clave==="Lizzy"){
+            if (clave==="Verónica Lizzette Chávez Mendoza"){
                 document.getElementById("PantallaContraseña").style.display="none";
                 document.getElementById("PantallaHuella").style.display="block";
             }else{
@@ -184,7 +174,6 @@
             }
         }
 
-        // ---------- ETAPA 1: HUELLA DIGITAL ----------
         function escanearHuella(){
             document.getElementById("mensajeHuella").innerText = "Escaneando...";
             setTimeout(function(){
@@ -197,7 +186,6 @@
             }, 2000);
         }
 
-        // ---------- ETAPA 2: DIAGNÓSTICO ----------
         function iniciarDiagnostico(){
             var mensajes = ["Pulso: normal ❤️", "Detectando síntomas...", "Nivel de cariño: alto", "Pulso acelerándose 💓", "Corazón detectado 💗"];
             var i = 0;
@@ -211,12 +199,11 @@
             }, 1200);
         }
 
-        // ---------- ETAPA 3: INSTALACIÓN ----------
         function mostrarInstalacion(){
             document.getElementById("PantallaDiagnostico").style.display="none";
             document.getElementById("PantallaInstalacion").style.display="block";
 
-            var mensajesInstalacion = ["Cargando ternura...", "Verificando compatibilidad: 100%", "Empacando recuerdos...", "Sincronizando corazones...", "Finalizando..."];
+            var mensajesInstalacion = ["Cargando ternura, aunque no soy mucho de eso va, pero hay vamos, jejeje...", "Verificando compatibilidad y tenemos al: 100%", "Empacando recuerdos, demasiados para mencionarlos todos...", "Sincronizando corazones, espero que ambos estemos igual en ello...", "Finalizando..."];
             var porcentaje = 0;
             var barra = document.getElementById("barra");
             var msj = document.getElementById("mensajeInstalacion");
@@ -241,7 +228,6 @@
             }, 150);
         }
 
-        // ---------- CONTADOR EN VIVO ----------
         function iniciarContador(){
             var fechaInicio = new Date(2024, 0, 1);
 
@@ -259,7 +245,6 @@
             }, 1000);
         }
 
-        // ---------- ETAPA 4: DETECTOR DE AMOR ----------
         function mostrarDetector(){
             document.getElementById("PantallaCertificado").style.display="none";
             document.getElementById("PantallaDetector").style.display="block";
@@ -269,10 +254,13 @@
             document.getElementById("resultadoDetector").innerText = "Analizando...";
             setTimeout(function(){
                 var resultados = [
-                    "Nivel de amor: fuera de escala 💘",
-                    "Compatibilidad detectada: 100%",
-                    "Alerta: sonrisa contagiosa detectada",
-                    "Resultado: la persona más especial confirmada"
+                    "Nivel que te amo: como no lo imaginas, fuera de aquí, fuera del mundo y fuera de hasta de mi corazón 💘",
+                    "Compatibilidad detectada: 100%, y eso no va a cambiar Verónica, ni hoy ni mañana y ni nunca",
+                    "Alerta: sonrisa contagiosa detectada, bueno, espero verte una sonrisa mi amor",
+                    "Resultado: la persona más especial confirmada..."
+                    "Y sabes..."
+                    "Esa personita..."
+                    "Eres tú, Verónica, te amo mi amor"
                 ];
                 var random = resultados[Math.floor(Math.random()*resultados.length)];
                 document.getElementById("resultadoDetector").innerText = random;
@@ -280,7 +268,6 @@
             }, 2000);
         }
 
-        // ---------- ETAPA 5: CONSTELACIÓN ----------
         function mostrarConstelacion(){
             document.getElementById("PantallaDetector").style.display="none";
             document.getElementById("PantallaConstelacion").style.display="block";
@@ -291,7 +278,6 @@
             document.getElementById("mensajeRecuerdo").innerText = mensaje;
         }
 
-        // ---------- ETAPA 6: CÁPSULA DEL TIEMPO ----------
         function mostrarCapsula(){
             document.getElementById("PantallaConstelacion").style.display="none";
             document.getElementById("PantallaCapsula").style.display="block";
@@ -300,8 +286,8 @@
 
         function cargarCapsulas(){
             var capsulas = [
-                { fecha: new Date(2026, 11, 25), mensaje: "Feliz Navidad, te amo" },
-                { fecha: new Date(2027, 0, 1), mensaje: "Feliz año nuevo, mi amor" }
+                { fecha: new Date(2026, 6, 27), mensaje: "Comenzamos oficialmente" },
+                { fecha: new Date(2027, 8, 27), mensaje: "El tiempo vuela, ya dos meses de historias, risas y cariño... te quiero Lizz" }
             ];
 
             var contenedor = document.getElementById("listaCapsulas");
@@ -321,4 +307,4 @@
     </script>
 
 </body>
-</html>
+</html> 
