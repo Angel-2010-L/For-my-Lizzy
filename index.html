@@ -382,10 +382,10 @@
 
         function escribirMaquina(texto, elementoId, callback){
             var elem = document.getElementById(elementoId);
-            elem.innerText = "";
+            elem.textContent = "";
             var i = 0;
             var intervalo = setInterval(function(){
-                elem.innerText += texto.charAt(i);
+                elem.textContent += texto.charAt(i);
                 i++;
                 if(i >= texto.length){
                     clearInterval(intervalo);
