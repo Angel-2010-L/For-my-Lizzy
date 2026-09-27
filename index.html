@@ -83,6 +83,33 @@
         .estrella.encontrada {
             background-color: #ffd700;
         }
+
+        /* ---------- ESTILOS NUEVOS ETAPA 7 ---------- */
+        .corazon-cae {
+            position: fixed;
+            top: -40px;
+            font-size: 24px;
+            pointer-events: none;
+            z-index: 9999;
+        }
+        @keyframes caer {
+            to { transform: translateY(110vh); opacity: 0.2; }
+        }
+        .sobre-emoji {
+            font-size: 100px;
+            transition: transform 1.2s ease;
+            display: inline-block;
+        }
+        .sobre-cerrado {
+            transform: rotateX(180deg) scale(0.7);
+        }
+        .fade-in {
+            animation: aparecer 1.5s ease forwards;
+        }
+        @keyframes aparecer {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
     </style>
 </head>
 <body>
@@ -161,8 +188,38 @@
     <div id="PantallaCapsula" style="display:none">
         <h1>Cápsula del Tiempo</h1>
         <div id="listaCapsulas"></div>
-        <!-- CAMBIAR AQUÍ: escribe tu mensaje final para Lizzy -->
-        <p style="margin-top:40px; font-size:20px;">Sabes, no solo te quiero y ni solo te amo, eres mi mejor amiga también, eres mi novia, eres una parte importante de mi vida ahora y no quiero perderte, te amo Verónica, y quiero compartirte mi vida entera, además de eso, maginate, me hiciste habar puro niño de 5 añoss, o sea, eso jamás lo había hecho pero por vos hago todo, lo que sea. En resumidas palabras significa que te amo, te adoro y eres todo para mí, no solo mi novia, sino que realmente eres todo y mucho para mi por ende quiero una vida contigo. Te amo mi Lizzy.</p>
+        <button onclick="mostrarFinal()">Siguiente</button>
+    </div>
+
+    <!-- ETAPA 7: MENSAJE FINAL -->
+    <div id="PantallaFinal" style="display:none">
+        <div id="lluviaCorazones"></div>
+
+        <div id="sobreEmoji" class="sobre-emoji">💌</div>
+        <p id="textoMaquina" style="font-size:20px; min-height:30px;"></p>
+
+        <div id="fraseFinal" style="display:none; margin-top:30px; font-size:20px; max-width:600px; margin-left:auto; margin-right:auto;">
+            <!-- CAMBIAR AQUÍ: aquí podés editar tu frase final si querés cambiarla -->
+            <p>Sabes, no solo te quiero y ni solo te amo, eres mi mejor amiga también, eres mi novia, eres una parte importante de mi vida ahora y no quiero perderte, te amo Verónica, y quiero compartirte mi vida entera, además de eso, maginate, me hiciste habar puro niño de 5 añoss, o sea, eso jamás lo había hecho pero por vos hago todo, lo que sea. En resumidas palabras significa que te amo, te adoro y eres todo para mí, no solo mi novia, sino que realmente eres todo y mucho para mi por ende quiero una vida contigo, sabes, tambié eres lo mejor que me ha pasado, yo no pensaba muchas cosas antes, de hecho si hubiera seguirdo lo que iba a hacer quien sabe que hubiera podido continuar en muchas cosas, vos me ayudas, soy parte de mis motivos de vida, eres parte de mi vida, eres mi todo... Vero, no quiero pasar por tu vida como las modas, no quiero que tengas miedo o penas conmigo, quiero que seas libre como lo eres, sonriente como nadie más, mi motivo de también de felicidad, por cierto, sé que ya te aburriste de leer, te conozc, jejeje, va pero mira ante cualquier cosa decíme ya te dije Contame todos tus pecaos y despues de eso te seguiré amando, y eso no cambiará mi Lizzy, eso desde ya te lo digo. Te amo mi Lizzy.</p>
+        </div>
+
+        <div id="fuegos"></div>
+
+        <button id="btnCerrarPrograma" style="display:none" onclick="mostrarCierre()">Cerrar programa</button>
+    </div>
+
+    <!-- ETAPA 8: CIERRE CON CONTRASEÑA -->
+    <div id="PantallaCierre" style="display:none">
+        <h1>Confirma tu contraseña para cerrar</h1>
+        <input type="text" id="ClaveCierre">
+        <br>
+        <button onclick="verificarCierre()">Confirmar</button>
+    </div>
+
+    <!-- ETAPA 9: DESPEDIDA FINAL -->
+    <div id="PantallaDespedida" style="display:none">
+        <!-- CAMBIAR AQUÍ: podés cambiar el mensaje de despedida si querés otro texto -->
+        <h1>Se ha realizado exitosamente la dedicatoria, mi reina, puede cerrar el programa, cuando quieras mi Verónica, mi nena, mi bonita</h1>
     </div>
 
     <script>
@@ -305,6 +362,101 @@
                 }
                 contenedor.appendChild(p);
             });
+        }
+
+        /* ---------- FUNCIONES NUEVAS ETAPA 7 ---------- */
+
+        var lluviaInterval;
+
+        function iniciarLluvia(){
+            lluviaInterval = setInterval(function(){
+                var corazon = document.createElement("div");
+                corazon.className = "corazon-cae";
+                corazon.innerText = "❤️";
+                corazon.style.left = Math.random()*100 + "vw";
+                corazon.style.animation = "caer " + (Math.random()*3+4) + "s linear forwards";
+                document.getElementById("lluviaCorazones").appendChild(corazon);
+                setTimeout(function(){ corazon.remove(); }, 8000);
+            }, 400);
+        }
+
+        function escribirMaquina(texto, elementoId, callback){
+            var elem = document.getElementById(elementoId);
+            elem.innerText = "";
+            var i = 0;
+            var intervalo = setInterval(function(){
+                elem.innerText += texto.charAt(i);
+                i++;
+                if(i >= texto.length){
+                    clearInterval(intervalo);
+                    if(callback) callback();
+                }
+            }, 60);
+        }
+
+        function fuegosArtificiales(){
+            var contenedor = document.getElementById("fuegos");
+            for(var i=0; i<24; i++){
+                var h = document.createElement("span");
+                h.innerText = "💖";
+                h.style.position = "fixed";
+                h.style.left = "50%";
+                h.style.top = "50%";
+                h.style.fontSize = (Math.random()*20+20) + "px";
+                h.style.transition = "transform 1.2s ease-out, opacity 1.2s ease-out";
+                h.style.zIndex = 9999;
+                contenedor.appendChild(h);
+
+                var angulo = Math.random()*2*Math.PI;
+                var distancia = Math.random()*300+100;
+                var x = Math.cos(angulo)*distancia;
+                var y = Math.sin(angulo)*distancia;
+
+                (function(elem, x, y){
+                    setTimeout(function(){
+                        elem.style.transform = "translate(" + x + "px," + y + "px)";
+                        elem.style.opacity = "0";
+                    }, 20);
+                    setTimeout(function(){ elem.remove(); }, 1500);
+                })(h, x, y);
+            }
+        }
+
+        function mostrarFinal(){
+            document.getElementById("PantallaCapsula").style.display="none";
+            document.getElementById("PantallaFinal").style.display="block";
+            iniciarLluvia();
+
+            var mensajeIntro = "Preparando mi último mensaje para ti, no el último en sí, pero de este programa por el momento sí...";
+
+            escribirMaquina(mensajeIntro, "textoMaquina", function(){
+                setTimeout(function(){
+                    document.getElementById("sobreEmoji").classList.add("sobre-cerrado");
+                    setTimeout(function(){
+                        var frase = document.getElementById("fraseFinal");
+                        frase.style.display = "block";
+                        frase.classList.add("fade-in");
+                        fuegosArtificiales();
+                        document.getElementById("btnCerrarPrograma").style.display="inline-block";
+                    }, 1200);
+                }, 1000);
+            });
+        }
+
+        function mostrarCierre(){
+            clearInterval(lluviaInterval);
+            document.getElementById("PantallaFinal").style.display="none";
+            document.getElementById("PantallaCierre").style.display="block";
+        }
+
+        function verificarCierre(){
+            var clave = document.getElementById("ClaveCierre").value;
+            if(clave==="Verónica Lizzette Chávez Mendoza"){
+                document.getElementById("PantallaCierre").style.display="none";
+                document.getElementById("PantallaDespedida").style.display="block";
+            }else{
+                alert("Contraseña Incorrecta");
+            }
         }
     </script>
 
